@@ -1,0 +1,22 @@
+spring.cloud.config.enabled: false
+spring.cloud.config.discovery.enabled: false
+spring:
+  autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  security:
+    jwt:
+      secretKey: SECRET_KEY
+      expirationMs: 3600000
+      refreshExpirationMs: 86400000
+eureka:
+  client:
+    enabled: false
+kafka:
+  topic:
+    put-delivery: test-put-delivery-topic
+    edit-status-delivery: test-edit-status-delivery-topic
+    cancel-delivery: test-cancel-delivery-topic
+    assign-courier: test-assign-courier-topic
+    notification-message: test-notification-message-topic
+management:
+  endpoints:
+    enabled-by-default: false

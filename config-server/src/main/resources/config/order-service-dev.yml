@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://order-database/order_db
+    username: postgres
+    password: '{cipher}f4609209a3e75d8ac79a5e3063ce151c2cd28aa431170bb06974b9421e807b6a'
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:29092
+    producer:
+      bootstrap-servers: kafka:29092

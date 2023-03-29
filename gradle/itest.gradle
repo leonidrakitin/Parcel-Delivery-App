@@ -1,0 +1,48 @@
+sourceSets {
+    itest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+
+            srcDir file('src/itest/java')
+        }
+        resources.srcDir file('src/itest/resources')
+    }
+
+    test {
+        resources.srcDir file('src/itest/resources')
+    }
+}
+
+configurations {
+    itestCompile.extendsFrom testCompile
+    itestRuntime.extendsFrom testRuntime
+    itestImplementation.extendsFrom testImplementation
+}
+
+task itest(type: Test) {
+    useJUnitPlatform()
+    description = 'Runs integration tests.'
+    group = 'verification'
+    testClassesDirs = sourceSets.itest.output.classesDirs
+    classpath = sourceSets.itest.runtimeClasspath
+
+    // This is not needed, but I like to see which tests have run
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+task testQdp(type: Test) {
+    systemProperty 'spring.profiles.active', 'qdp'
+    useJUnitPlatform()
+    description = 'Runs integration tests with qdp.'
+    group = 'verification'
+    testClassesDirs = sourceSets.itest.output.classesDirs
+    classpath = sourceSets.itest.runtimeClasspath
+
+    // This is not needed, but I like to see which tests have run
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

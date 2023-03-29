@@ -1,0 +1,52 @@
+databaseChangeLog:
+- changeSet:
+    id: 1679903842982-1
+    author: leonid.rakitin (generated)
+    changes:
+    - sql:
+        dbms: postgresql
+        endDelimiter: ';'
+        splitStatements: true
+        sql: CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: orders_pkey
+            defaultValueComputed: uuid_generate_v4()
+            name: order_uuid
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: description
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: destination
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: status
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: price
+            type: FLOAT8
+        - column:
+            constraints:
+              nullable: false
+            name: created_time
+            type: date
+        - column:
+            name: created_by_id
+            type: BIGINT
+        - column:
+            name: created_by_name
+            type: VARCHAR(50)
+        tableName: orders

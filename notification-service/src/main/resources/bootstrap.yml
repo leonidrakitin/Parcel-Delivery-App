@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: notification-service
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://${SPRING_CLOUD_CONFIG_USERNAME}:${SPRING_CLOUD_CONFIG_PASSWORD}@config-server:8071
+logging:
+  level:
+    root: INFO

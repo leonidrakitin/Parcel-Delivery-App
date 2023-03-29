@@ -1,0 +1,35 @@
+server:
+  port: 8094
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8070/eureka/
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+  kafka:
+    consumer:
+      group-id: notification-group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties.spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+management:
+  endpoints:
+    enabled-by-default: true
+    web.exposure.include: "*"
+kafka:
+  topic:
+    put-delivery: private.parcel.order.update.ordermessage
+    edit-status-delivery: private.parcel.order.update.status
+    cancel-delivery: private.parcel.order.cancel.orderid
+    assign-courier: private.parcel.order.assign.courier
+    notification-message: private.parcel.order.notification
+

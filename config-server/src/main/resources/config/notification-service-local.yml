@@ -1,0 +1,10 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+    producer:
+      bootstrap-servers: localhost:9092

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://auth-database/auth_db
+    username: postgres
+    password: '{cipher}f4609209a3e75d8ac79a5e3063ce151c2cd28aa431170bb06974b9421e807b6a'
+  liquibase:
+    drop-first: true

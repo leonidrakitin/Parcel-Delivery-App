@@ -1,0 +1,77 @@
+databaseChangeLog:
+- changeSet:
+    id: 1679842685975-1
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: deliveries_pkey
+            name: order_uuid
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: destination
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: status
+            type: VARCHAR(50)
+        - column:
+            name: courier_id
+            type: BIGINT
+        - column:
+            name: courier
+            type: VARCHAR(50)
+        tableName: deliveries
+- changeSet:
+    id: 1679842685975-2
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: delivery_coordinates_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: order_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: latitude
+            type: FLOAT8
+        - column:
+            constraints:
+              nullable: false
+            name: longitude
+            type: FLOAT8
+        tableName: delivery_coordinates
+- changeSet:
+    id: 1679842685975-3
+    author: leonid.rakitin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: order_id
+        baseTableName: delivery_coordinates
+        constraintName: delivery_coordinates_order_id_fkey
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: order_uuid
+        referencedTableName: deliveries
+        validate: true
+

@@ -1,0 +1,146 @@
+databaseChangeLog:
+- changeSet:
+    id: 1680022140705-1
+    author: leonid.rakitin (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: hibernate_sequence
+        startValue: 1
+- changeSet:
+    id: 1680022140705-2
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: refresh_token_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: expiry_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: token
+            type: VARCHAR(255)
+        - column:
+            name: user_id
+            type: BIGINT
+        tableName: refresh_token
+- changeSet:
+    id: 1680022140705-3
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: roles_pkey
+            name: id
+            type: INTEGER
+        - column:
+            name: name
+            type: VARCHAR(50)
+        tableName: roles
+- changeSet:
+    id: 1680022140705-4
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_roles_pkey
+            name: user_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_roles_pkey
+            name: role_id
+            type: INTEGER
+        tableName: user_roles
+- changeSet:
+    id: 1680022140705-5
+    author: leonid.rakitin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: email
+            type: VARCHAR(50)
+        - column:
+            name: password
+            type: VARCHAR(80)
+        - column:
+            name: username
+            type: VARCHAR(50)
+        - column:
+            name: role_id
+            type: INTEGER
+        tableName: users
+- changeSet:
+    id: 1680022140705-6
+    author: leonid.rakitin (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: uk6dotkott2kjsp8vw4d0m25fb7
+        tableName: users
+- changeSet:
+    id: 1680022140705-7
+    author: leonid.rakitin (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: token
+        constraintName: uk_r4k4edos30bx9neoq81mdvwph
+        tableName: refresh_token
+- changeSet:
+    id: 1680022140705-8
+    author: leonid.rakitin (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: username
+        constraintName: ukr43af9ap4edm43mmtq01oddj6
+        tableName: users
+- changeSet:
+    id: 1680022140705-9
+    author: leonid.rakitin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableName: users
+        constraintName: fkp56c1712k691lhsyewcssf40f
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: roles
+        validate: true

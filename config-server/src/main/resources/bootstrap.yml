@@ -1,0 +1,35 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: config-server
+  profiles:
+    active:
+      - native
+#      - git
+#      - vault
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+#        git:
+#          uri: https://github.com/leonidrakitin/parceldelivery-configs.git
+#          username: ${USERNAME}
+#          password: ${CREDENTIALS}
+#        vault:
+#          uri: http://0.0.0.0:8200
+#          backend: secrets
+#          profile-separator: /
+#          kv-version: 2
+  security:
+    user:
+      name: ${SPRING_CLOUD_CONFIG_USERNAME}
+      password: ${SPRING_CLOUD_CONFIG_PASSWORD}
+encrypt:
+  key: ${ENCRYPT_KEY}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
