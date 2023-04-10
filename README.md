@@ -1,5 +1,7 @@
 # Parcel Delivery APP
-[![Gradle](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml/badge.svg)](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml)
+[![Gradle](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml/badge.svg?branch=master)](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml)
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
 
 This is my implementation of the test task with the following assignment:
 
