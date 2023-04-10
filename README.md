@@ -1,5 +1,5 @@
 # Parcel Delivery APP
-[![Java CI with Gradle](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/gradle.yml/badge.svg)](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/gradle.yml)
+[![Gradle](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml/badge.svg)](https://github.com/leonidrakitin/Parcel-Delivery-App/actions/workflows/ci-gradle-build.yml)
 
 This is my implementation of the test task with the following assignment:
 
