@@ -110,18 +110,15 @@ services:
       profile: "default"
     depends_on:
     - config-server
-#        condition:
-#          service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "ping -c 10 localhost" ]
+      interval: 5s
+      timeout: 30s
+      retries: 5
     networks:
       backend:
         aliases:
           - "eureka-server"
-    healthcheck:
-      test: [ "CMD-SHELL", "sleep 30 && curl --fail http://localhost:8070/actuator/health || exit 1" ]
-      interval: 15s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
   gateway-server:
     container_name: gateway-server
     build:
@@ -138,6 +135,11 @@ services:
     depends_on:
       - eureka-server
       - config-server
+    healthcheck:
+      test: [ "CMD-SHELL", "ping -c 10 localhost" ]
+      interval: 5s
+      timeout: 30s
+      retries: 5
     networks:
       backend:
         aliases:
