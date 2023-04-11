@@ -26,7 +26,7 @@ must be implemented as a microservice architecture that is deployable using cont
 - Actuator, Prometheus, Grafana
 
 ## SOLUTION DESIGN
-![App design solution](images/solution.jpg)
+![App design solution](.github/images/solution.jpg)
 
 ## QUICK START
 
@@ -74,7 +74,7 @@ By default, the **native** profile is used, but you can use either Vault or Git 
 
 ## DOCUMENTATION: SWAGGER UI
 
-![img.png](images/swagger.png)
+![img.png](.github/images/swagger.png)
 
 Documentation is available on [/swagger-ui.html](localhost:8080/swagger-ui.html)
 ###### config-server/gateway-server.yml:
