@@ -51,7 +51,7 @@ Below, I am attaching credentials for **admin** user.
 
 Please keep in mind that you can use the following endpoints for user registration/login.
 
-**POST** `/api/v1/auth/register`
+**POST** `/v1/auth/register`
 ```json
 {
     "username": "username",
@@ -59,13 +59,15 @@ Please keep in mind that you can use the following endpoints for user registrati
     "password": "password"
 }
 ```
-**POST** `/api/v1/auth/login`
+**POST** `/v1/auth/login`
 ```json
 {
     "username": "username",
     "password": "password"
 }
 ```
+
+> ⚠️ To send a request to any endpoint, use **${host}:8080/api**, where by default **${host} = localhost**. For example: **http://localhost:8080/api/v1/users**. 
 ---
 ##### SPRING CLOUD CONFIG
 By default, the **native** profile is used, but you can use either Vault or Git (https://github.com/leonidrakitin/parceldelivery-configs.git).
