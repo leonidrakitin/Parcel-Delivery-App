@@ -11,9 +11,6 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
-  cors:
-    allowed-origins: "*"
-    allowed-methods: GET, PUT, POST, OPTIONS
   jpa:
     database: POSTGRESQL
     show-sql : true
@@ -45,6 +42,11 @@ spring:
       secretKey: JfgsqVS0pV2Gn6jEMWG5UYMygDLptvmOSYaWobf1sLwnk0X8TXjvBTaVhCaBOZr
       expirationMs: 3600000
       refreshExpirationMs: 86400000
+  mvc:
+    cors:
+      mapping: "/**"
+      allowed-origins: "*"
+      allowed-methods: "GET, PUT, POST, PATCH, DELETE"
 management:
   endpoints:
     enabled-by-default: true
@@ -56,3 +58,25 @@ kafka:
     cancel-delivery: private.parcel.order.cancel.orderid
     assign-courier: private.parcel.order.assign.courier
     notification-message: private.parcel.order.notification
+resilience4j.circuitbreaker:
+  instances:
+    licenseService:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 5
+      ringBufferSizeInHalfOpenState: 1
+      waitDurationInOpenState: 3s
+      failureRateThreshold: 50
+      recordExceptions:
+        - feign.FeignException
+        - java.lang.InterruptedException
+resilience4j.retry:
+  instances:
+    myRetry:
+      maxRetryAttempts: 3
+      waitDuration: 1s
+      retryExceptions:
+        - feign.FeignException
+resilience4j.timelimiter:
+  instances:
+    myTimeLimiter:
+      timeoutDuration: 5s

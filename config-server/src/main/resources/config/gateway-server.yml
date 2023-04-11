@@ -8,9 +8,9 @@ eureka:
       defaultZone: http://eureka-server:8070/eureka/
 spring:
   cloud:
-#    loadbalancer:
-#      ribbon:
-#        enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
     gateway:
       discovery.locator:
         enabled: true
@@ -31,9 +31,22 @@ spring:
         - id: auth-server
           uri: lb://auth-server
           predicates:
-            - Path=/api/v{version:\d+}/auth/** #, /api/v{version:\d+}/users/**
+            - Path=/api/v{version:\d+}/auth/**, /api/v{version:\d+}/users/**
           filters:
             - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    url: /v3/api-docs/swagger-config
+    configUrl: /v3/api-docs/swagger-config
+    servers:
+    urls:
+      - url: /order-service/v3/api-docs
+        name: Orders API
+      - url: /delivery-service/v3/api-docs
+        name: Deliveries API
+      - url: /auth-server/v3/api-docs
+        name: Authentication API
 management:
   endpoint.gateway.enabled: true
   endpoints.web.exposure.include: "*"
