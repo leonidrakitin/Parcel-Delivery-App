@@ -95,3 +95,8 @@ springdoc:
         name: Authentication API
 ```
 
+## TODO:
+- Sonar Qube
+- Spring Cloud Sleuth, Zipkin, ELK
+- Keycloak
+- Spring Email
