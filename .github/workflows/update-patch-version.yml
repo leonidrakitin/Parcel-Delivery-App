@@ -1,9 +1,9 @@
-name: Update patch version parcelAppVersion
+name: Update sdfProBEVersion on PR Merge
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
   update-version:
@@ -13,24 +13,30 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Update parcelAppVersion
+      - name: Update SdfProBEVersion
         run: |
-          current_version=$(grep 'parcelAppVersion=' gradle.properties | cut -d'=' -f2)
-        
-          IFS='.' read -ra version_parts <<< "$current_version"
-          major="${version_parts[0]}"
-          minor="${version_parts[1]}"
-          patch="${version_parts[2]}"
-          ((patch++))
-          new_version="$major.$minor.$patch"
-        
-          sed -i "s/parcelAppVersion=$current_version/parcelAppVersion=$new_version/" gradle.properties
-        
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add gradle.properties
-          git commit -m "$new_version"
-          git push
+          if [ "${{ github.event.pull_request.merged }}" == "true" ]; then
+            current_version=$(grep 'sdfProBEVersion=' gradle.properties | cut -d'=' -f2)
+
+            IFS='.' read -ra version_parts <<< "$current_version"
+            major="${version_parts[0]}"
+            minor="${version_parts[1]}"
+            patch="${version_parts[2]}"
+            build="${version_parts[3]}"
+
+            ((build++))
+
+            build=$(printf "%04d" $build)
+
+            new_version="$major.$minor.$patch.$build"
+            sed -i "s/sdfProBEVersion=$current_version/sdfProBEVersion=$new_version/" gradle.properties
+
+            git config user.name "${{ github.event.pull_request.user.login }}"
+            git config user.email "${{ github.event.pull_request.user.email }}"
+          
+            git add gradle.properties
+            git commit -m "Update SdfProBEVersion to $new_version"
+            git push
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
